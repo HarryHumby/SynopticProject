@@ -1,0 +1,13 @@
+.main-button-holder {
+  display: flex;
+  margin-top: 20px;
+}
+.main-button-holder button {
+  height: 40px;
+  width: 40px;
+  margin: 5px;
+}
+
+.main-button-holder .shuffle-button{
+  margin-left: auto;
+}

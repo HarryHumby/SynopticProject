@@ -1,9 +1,14 @@
 import express from 'express';
-import os from 'os';
+
+import routes from './routes';
 
 const app = express();
+const router = express.Router();
 
 app.use(express.static('dist/react'));
-app.get('/api/getUsername', (req, res) => res.send({ username: os.userInfo().username }));
+app.use('/api/', router);
 
-app.listen(process.env.PORT || 8080, () => console.log(`Listening on port ${process.env.PORT || 8080}!`));
+app.listen(process.env.PORT || 8080, () => {
+    console.log(`Listening on port ${process.env.PORT || 8080}!`)
+    routes(router);
+});

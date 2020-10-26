@@ -1,0 +1,11 @@
+.display-screen {
+  height: 100px;
+  padding: 10px;
+  background-color: #121212;
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid white 1px;
+  border-radius: 25px;
+}
