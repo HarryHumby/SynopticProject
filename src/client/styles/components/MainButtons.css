@@ -1,11 +1,14 @@
 .main-button-holder {
   display: flex;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 .main-button-holder button {
   height: 40px;
   width: 40px;
   margin: 5px;
+  background-color: #121212;
+  color: #b3b3b3;
+  border-radius: 25px;
 }
 
 .main-button-holder .shuffle-button{
