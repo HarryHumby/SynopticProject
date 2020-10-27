@@ -6,6 +6,7 @@ const app = express();
 const router = express.Router();
 
 app.use(express.static('dist/react'));
+app.use('/resources', express.static('resources'));
 app.use('/api/', router);
 
 app.listen(process.env.PORT || 8080, () => {
