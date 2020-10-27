@@ -11,6 +11,10 @@
   border-radius: 25px;
 }
 
-.main-button-holder .shuffle-button{
+.main-button-holder button:disabled {
+ background-color: #ffffff
+}
+
+.main-button-holder .home-button{
   margin-left: auto;
 }

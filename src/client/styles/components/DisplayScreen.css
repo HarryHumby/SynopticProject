@@ -12,6 +12,7 @@
   position: relative;
   top: -10px;
   left: 120px;
+  pointer-events: none;
 }
 
 .display-screen .song-artist {
@@ -19,6 +20,7 @@
   position: relative;
   left: 120px;
   top: -20px;
+  pointer-events: none;
 }
 
 .display-screen .song-image {
@@ -34,4 +36,79 @@
   position: relative;
   left: 540px;
   top: -155px;
+}
+
+.home-view .display-screen {
+  display: flex;
+  justify-content: center;
+}
+
+.home-view .display-screen button {
+  height: 90px;
+  width: 150px;
+  margin: 5px;
+  display: grid;
+}
+
+.home-view .display-screen button i {
+  font-size: 50px;
+}
+
+.library-view .display-screen {
+  display: flex;
+}
+
+.library-view .display-screen .library-audio-file {
+  position: relative;
+  text-align: center;
+  height: 100%;
+  margin: 5px;
+  width: 100px;
+  border: solid white 1px;
+  border-radius: 25px;
+  background-size: contain;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.library-view .display-screen .library-audio-file .song-title {
+  position: relative;
+  font-size: 16px;
+  left: 0px;
+  top: 0px;
+  margin: 5px;
+  color: white;
+  height: fit-content;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.playlist-list-view .display-screen {
+  display: flex;
+}
+
+.playlist-list-view .display-screen .playlist-list-icon {
+  position: relative;
+  text-align: center;
+  height: 100%;
+  margin: 5px;
+  width: 100px;
+  border: solid white 1px;
+  border-radius: 25px;
+  background-size: contain;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+}
+
+.playlist-list-view .display-screen .playlist-list-icon .playlist-title {
+  position: relative;
+  font-size: 16px;
+  left: 0px;
+  top: 0px;
+  margin: 5px;
+  color: black;
+  height: fit-content;
+  pointer-events: none;
 }

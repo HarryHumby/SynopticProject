@@ -1,46 +1,9 @@
 import React, { Component } from 'react';
-import MainButtons from './components/MainButtons';
-import DisplayScreen from './components/DisplayScreen';
-import MusicPlayer from './components/MusicPlayer';
+import PlaylistListView from './views/PlaylistListView';
+import PlaylistView from './views/PlaylistView';
+import LibraryView from './views/LibraryView';
+import HomeView from './views/HomeView';
 import './styles/app.css';
-
-const defaultPlaylist = [
-{
-  id: "Orchestral",
-  title: "The Lay of the Last Minstrel",
-  artist: "Hamish MacCunn",
-  type: "MP3",
-  image: "https://upload.wikimedia.org/wikipedia/commons/7/7a/The_lay_of_the_last_minstrel_-_by_Sir_Walter_Scott%2C_Illustrated_by_James_Henry_Nixon.png"
-},
-{
-  id: "Chamber",
-  title: "String Quartet No 14 in D minor",
-  artist: "Franz Schubert",
-  type: "MP3",
-  image: "https://cps-static.rovicorp.com/3/JPG_400/MI0000/996/MI0000996485.jpg?partner=allrovi.com"
-},
-{
-  id: "Instrumental",
-  title: "Piano Sonata in D major",
-  artist: "Muzio Clementi",
-  type: "MP3",
-  image: "https://1.bp.blogspot.com/-1ig2mKZyknk/Xa0fZ2ng5ZI/AAAAAAAATaY/5avcAweXe3MazUTBt_9GeF3o7I2XStlVACNcBGAsYHQ/s1600/cover.jpg"
-},
-{
-  id: "Choral",
-  title: "Videns Dominus",
-  artist: "Jacobus Vaet",
-  type: "MP3",
-  image: "https://blob.cede.ch/catalog/100740000/100740517_2_92.jpg?v=1"
-},
-{
-  id: "Vocal",
-  title: "The Lost Chord",
-  artist: "Arthur Sullivan",
-  type: "MP3",
-  image: "https://upload.wikimedia.org/wikipedia/commons/e/e3/LostChord_sm.jpg"
-}
-];
 
 export default class App extends Component {
   
@@ -48,64 +11,37 @@ export default class App extends Component {
     super(props);
 
     this.state = {
-      playlist: defaultPlaylist,
-      position: 0,
-      playing: false
+      view: <HomeView switchToPlaylistListView={this.switchToPlaylistListView} switchToLibraryView={this.switchToLibraryView} switchToHomeView={this.switchToHomeView}/>
     }
   }
 
-  nextSong = () => {
-    let currentPosition = this.state.position, newPosition;
-    
-    if (currentPosition === this.state.playlist.length - 1) {
-      newPosition = 0;
-    } else {
-      newPosition = ++currentPosition;
-    }
-
+  switchToHomeView = () => {
     this.setState({
-      position: newPosition
+      view: <HomeView switchToPlaylistListView={this.switchToPlaylistListView} switchToLibraryView={this.switchToLibraryView} switchToHomeView={this.switchToHomeView}/>
     })
   }
 
-  previousSong = () => {
-    let currentPosition = this.state.position, newPosition;
-    
-    if (currentPosition === 0) {
-      newPosition =  this.state.playlist.length - 1;
-    } else {
-      newPosition = --currentPosition;
-    }
-
+  switchToPlaylistListView = () => {
     this.setState({
-      position: newPosition
+      view: <PlaylistListView switchToPlaylistView={this.switchToPlaylistView} switchToHomeView={this.switchToHomeView}/>
     })
   }
 
-  randomSong = () => {
-    let currentPosition = this.state.position, newPosition;
-
-    do {
-      newPosition =  Math.floor(Math.random()*this.state.playlist.length)
-    } while (newPosition === currentPosition);
-
+  switchToPlaylistView = (playlist) => {
     this.setState({
-      position: newPosition
+      view: <PlaylistView switchToHomeView={this.switchToHomeView} playlist = {playlist}/>
     })
   }
 
-  pausePlaySong = () => {
-    let currentlyPlaying = this.state.playing;
+  switchToLibraryView = () => {
     this.setState({
-      playing: !currentlyPlaying
+      view: <LibraryView switchToHomeView={this.switchToHomeView} switchToPlaylistView={this.switchToPlaylistView}/>
     })
   }
 
   render() {
-    return (<div className="app">
-      <DisplayScreen selection={this.state.playlist[this.state.position]} playlistPosition={this.state.position + 1} playlistSize={this.state.playlist.length}/>
-      <MainButtons nextSong={this.nextSong} previousSong={this.previousSong} randomSong={this.randomSong} pausePlaySong={this.pausePlaySong} playing={this.state.playing}/>
-      <MusicPlayer selection={this.state.playlist[this.state.position]} nextSong={this.nextSong} playing={this.state.playing}/>
+      return (<div className="app">
+      {this.state.view}
       </div>
     );
   }
