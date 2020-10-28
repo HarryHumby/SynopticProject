@@ -66,8 +66,19 @@ export default class PlaylistView extends Component {
   }
 
   render() {
+    let playListPosition, displayScreenRender, currentSong = this.state.playlist[this.state.position];    
+
+    if (this.state.playlist.length > 1) {
+      playListPosition = <p className="playlist-position">{this.state.position + 1} / {this.state.playlist.length}</p>
+    }
+
+    displayScreenRender = [ <h1 className="song-title">{currentSong.title}</h1>,
+    <h3 className="song-artist">{currentSong.artist}</h3>,
+    <img className="song-image" src={currentSong.image}/>,
+    playListPosition]
+    
     return (<div className="playlist-view">
-      <DisplayScreen view={"playlist"} selection={this.state.playlist[this.state.position]} playlistPosition={this.state.position + 1} playlistSize={this.state.playlist.length}/>
+      <DisplayScreen renderView={displayScreenRender} />
       <MainButtons nextSong={this.nextSong} previousSong={this.previousSong} randomSong={this.randomSong} pausePlaySong={this.pausePlaySong} playing={this.state.playing} switchToHomeView={this.props.switchToHomeView} playlistSize={this.state.playlist.length}/>
       <MusicPlayer selection={this.state.playlist[this.state.position]} nextSong={this.nextSong} playing={this.state.playing}/>
       </div>

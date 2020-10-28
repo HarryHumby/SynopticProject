@@ -7,7 +7,9 @@ export default class PlaylistListView extends Component {
   
   constructor(props) {
     super(props);
-
+    
+    this.handlePlaylistListClickEventFunction = this.handlePlaylistListClickEventFunction.bind(this);
+    
     this.state = {
       playlists: []
     }
@@ -25,9 +27,26 @@ export default class PlaylistListView extends Component {
       })
   }
 
+  handlePlaylistListClickEventFunction(event) {
+    this.props.switchToPlaylistView(this.state.playlists[event.target.id].collection);
+  }
+
   render() {
+    let displayScreenRender, centreContentOnDisplay = false;
+
+    if (this.state.playlists && this.state.playlists.length && this.state.playlists[0]) {
+      displayScreenRender = this.state.playlists.map((playlist, i) => {
+        return <div id={i} className="playlist-list-icon" onClick={this.props.switchToPlaylistView} onClick={this.handlePlaylistListClickEventFunction}>
+          <h1 className="playlist-title">{playlist.title}</h1>
+        </div>
+      })
+    } else {
+      displayScreenRender = <h1 className="no-songs-found">No playlists found.</h1>
+      centreContentOnDisplay = true;
+    }
+
     return (<div className="playlist-list-view">
-      <DisplayScreen view={"playlist-list"} playlists={this.state.playlists} switchToPlaylistView={this.props.switchToPlaylistView}/>
+      <DisplayScreen renderView={displayScreenRender} centreContentOnDisplay={centreContentOnDisplay} />
       <MainButtons disabled={true} switchToHomeView={this.props.switchToHomeView}/>
       </div>
     );

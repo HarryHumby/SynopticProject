@@ -3,6 +3,7 @@ import PlaylistListView from './views/PlaylistListView';
 import PlaylistView from './views/PlaylistView';
 import LibraryView from './views/LibraryView';
 import HomeView from './views/HomeView';
+import SearchView from './views/SearchView';
 import './styles/app.css';
 
 export default class App extends Component {
@@ -11,13 +12,13 @@ export default class App extends Component {
     super(props);
 
     this.state = {
-      view: <HomeView switchToPlaylistListView={this.switchToPlaylistListView} switchToLibraryView={this.switchToLibraryView} switchToHomeView={this.switchToHomeView}/>
+      view: <HomeView switchToPlaylistListView={this.switchToPlaylistListView} switchToLibraryView={this.switchToLibraryView} switchToHomeView={this.switchToHomeView} switchToSearchView={this.switchToSearchView}/>
     }
   }
 
   switchToHomeView = () => {
     this.setState({
-      view: <HomeView switchToPlaylistListView={this.switchToPlaylistListView} switchToLibraryView={this.switchToLibraryView} switchToHomeView={this.switchToHomeView}/>
+      view: <HomeView switchToPlaylistListView={this.switchToPlaylistListView} switchToLibraryView={this.switchToLibraryView} switchToHomeView={this.switchToHomeView} switchToSearchView={this.switchToSearchView}/>
     })
   }
 
@@ -33,9 +34,15 @@ export default class App extends Component {
     })
   }
 
-  switchToLibraryView = () => {
+  switchToLibraryView = (search = "") => {
     this.setState({
-      view: <LibraryView switchToHomeView={this.switchToHomeView} switchToPlaylistView={this.switchToPlaylistView}/>
+      view: <LibraryView search={search} switchToHomeView={this.switchToHomeView} switchToPlaylistView={this.switchToPlaylistView}/>
+    })
+  }
+
+  switchToSearchView = () => {
+    this.setState({
+      view: <SearchView switchToHomeView={this.switchToHomeView} switchToLibraryView={this.switchToLibraryView} />
     })
   }
 

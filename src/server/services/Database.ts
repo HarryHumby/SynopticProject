@@ -18,6 +18,21 @@ class Database {
         })
     }
 
+    searchAudioFiles(search) {
+        return new Promise((resolve, reject) => {
+            this.connect().then((client) => {
+                client.db("MusicPlayer").collection("audioFiles").find({$text: {$search: search}})
+                    .toArray()
+                    .then((res) => {
+                        resolve(res);
+                    })
+                    .catch((err) => {
+                        reject(err);
+                    })
+            })
+        })
+    }
+
     listPlaylists() {
         return new Promise((resolve, reject) => {
             this.connect().then((client) => {
