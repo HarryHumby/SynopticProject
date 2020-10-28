@@ -1,0 +1,24 @@
+.switch-order-button-holder {
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+.switch-order-button-holder .switch-order-button {
+  border: none;
+  position: absolute;
+  left: 562px;
+}
+
+.switch-order-button-holder .switch-order-notif {
+  font-size: 20px;
+  background-color: #121212;
+  padding: 5px;
+  display: none;
+  position: absolute;
+  right: -562px;
+  top: -21px;
+  z-index: 100;
+  border: 2px solid white;
+  text-transform: capitalize;
+}

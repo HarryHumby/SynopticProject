@@ -48,19 +48,19 @@ class Database {
         })
     }
 
-    // createPlaylist() {
-    //     return new Promise((resolve, reject) => {
-    //         this.connect().then((client: MongoClient) => {
-    //             client.db("MusicPlayer").collection("playlists").insertOne({})
-    //                 .then((res) => {
-    //                     resolve(res);
-    //                 })
-    //                 .catch((err) => {
-    //                     reject(err);
-    //                 })
-    //         })
-    //     })
-    // }
+    createPlaylist(playlistData) {
+        return new Promise((resolve, reject) => {
+            this.connect().then((client) => {
+                client.db("MusicPlayer").collection("playlists").insertOne(playlistData)
+                    .then((res) => {
+                        resolve(res);
+                    })
+                    .catch((err) => {
+                        reject(err);
+                    })
+            })
+        })
+    }
     
     connect() {
         const client = new MongoClient(process.env.mongoURL || `mongodb://localhost:27017`);

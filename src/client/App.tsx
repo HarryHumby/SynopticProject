@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PlaylistListView from './views/PlaylistListView';
 import PlaylistView from './views/PlaylistView';
+import CreatePlaylistView from './views/CreatePlaylistView';
 import LibraryView from './views/LibraryView';
 import HomeView from './views/HomeView';
 import SearchView from './views/SearchView';
@@ -12,7 +13,8 @@ export default class App extends Component {
     super(props);
 
     this.state = {
-      view: <HomeView switchToPlaylistListView={this.switchToPlaylistListView} switchToLibraryView={this.switchToLibraryView} switchToHomeView={this.switchToHomeView} switchToSearchView={this.switchToSearchView}/>
+      view: <HomeView switchToPlaylistListView={this.switchToPlaylistListView} switchToLibraryView={this.switchToLibraryView} switchToHomeView={this.switchToHomeView} switchToSearchView={this.switchToSearchView}/>,
+      idle: false
     }
   }
 
@@ -24,13 +26,19 @@ export default class App extends Component {
 
   switchToPlaylistListView = () => {
     this.setState({
-      view: <PlaylistListView switchToPlaylistView={this.switchToPlaylistView} switchToHomeView={this.switchToHomeView}/>
+      view: <PlaylistListView switchToPlaylistView={this.switchToPlaylistView} switchToHomeView={this.switchToHomeView} switchToCreatePlaylistView={this.switchToCreatePlaylistView} />
     })
   }
 
   switchToPlaylistView = (playlist) => {
     this.setState({
       view: <PlaylistView switchToHomeView={this.switchToHomeView} playlist = {playlist}/>
+    })
+  }
+
+  switchToCreatePlaylistView = () => {
+    this.setState({
+      view: <CreatePlaylistView switchToHomeView={this.switchToHomeView} />
     })
   }
 
@@ -44,6 +52,18 @@ export default class App extends Component {
     this.setState({
       view: <SearchView switchToHomeView={this.switchToHomeView} switchToLibraryView={this.switchToLibraryView} />
     })
+  }
+
+  setIdle() {
+    this.setState({
+      idle: true
+    });
+  }
+
+  setAwake() {
+    this.setState({
+      idle: false
+    });
   }
 
   render() {

@@ -36,10 +36,13 @@ export default class PlaylistListView extends Component {
 
     if (this.state.playlists && this.state.playlists.length && this.state.playlists[0]) {
       displayScreenRender = this.state.playlists.map((playlist, i) => {
-        return <div id={i} className="playlist-list-icon" onClick={this.props.switchToPlaylistView} onClick={this.handlePlaylistListClickEventFunction}>
+        return <div id={i} className="playlist-list-icon" onClick={this.handlePlaylistListClickEventFunction}>
           <h1 className="playlist-title">{playlist.title}</h1>
         </div>
       })
+      displayScreenRender.push(<div id={"create"} className="playlist-list-icon" onClick={this.props.switchToCreatePlaylistView}>
+      <h1 className="playlist-title"><i class="fa fa-plus"></i>Create New</h1>
+    </div>);
     } else {
       displayScreenRender = <h1 className="no-songs-found">No playlists found.</h1>
       centreContentOnDisplay = true;

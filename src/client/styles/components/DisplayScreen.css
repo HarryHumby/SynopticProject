@@ -58,6 +58,8 @@
 .library-view .display-screen {
   display: flex;
   padding-left: 5px;
+  flex-wrap: wrap;
+  overflow: auto;
 }
 
 .library-view .display-screen .library-audio-file {
@@ -73,6 +75,8 @@
   align-items: center;
   justify-content: center;
   min-width: 100px;
+  margin-top: 0px;
+  margin-bottom: 10px;
 }
 
 .library-view .display-screen .library-audio-file .song-title {
@@ -121,6 +125,11 @@
   color: black;
   height: fit-content;
   pointer-events: none;
+  display: grid;
+}
+
+.playlist-list-view .display-screen .playlist-list-icon .playlist-title i {
+  margin-bottom: 10px;
 }
 
 .search-view .display-screen {
@@ -134,4 +143,12 @@
 
 .search-view .display-screen .search-submit {
   font-size: 20px;
+}
+
+.create-playlist-view .display-screen .list-holder {
+  display: flex;
+}
+
+.create-playlist-view .display-screen .list-column {
+  width: 100%;
 }
