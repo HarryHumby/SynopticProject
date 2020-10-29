@@ -1,5 +1,3 @@
-.vscode
-node_modules
-dist
-*.log
-package-lock
+Application/node_modules
+Application/dist
+Application/package-lock.json
