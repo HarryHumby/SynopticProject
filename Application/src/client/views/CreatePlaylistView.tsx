@@ -3,24 +3,56 @@ import DisplayScreen from '../components/DisplayScreen';
 import MainButtons from '../components/MainButtons';
 import {DragDropContext, DropResult} from 'react-beautiful-dnd';
 import Column from '../components/Column';
+import AudioFiles from '../services/AudioFiles';
+import Playlists from '../services/Playlists';
 
 export default class CreatePlaylistView extends Component {
 
   constructor(props) {
     super(props);
 
+    this.onDragEnd = this.onDragEnd.bind(this);
+    this.savePlaylist = this.savePlaylist.bind(this);
+    this.updatePlaylistTitle = this.updatePlaylistTitle.bind(this);
+
     this.state = {
+      playlistTitle: "",
       columns: {
         Playlist: {
           id: 'Playlist',
+          name: 'Playlist:',
           list: []
         },
         AllSongs: {
-          id: 'All Songs',
+          id: 'AllSongs',
+          name: 'Add Songs:',
           list: ['item 1', 'item 2', 'item 3']
         }
       }
     }
+  }
+
+  sortAudioFiles(audioFiles, orderBy) {
+    return audioFiles.sort((a, b) => {
+      if(a[orderBy] < b[orderBy]) { return -1; }
+      if(a[orderBy] > b[orderBy]) { return 1; }
+      return 0;
+    });
+  }
+
+  componentDidMount() {
+    AudioFiles.listMusic(this.props.search)
+      .then((audioFiles) => {
+        let newColumns = this.state.columns;
+        newColumns.AllSongs.list = this.sortAudioFiles(audioFiles, "title");
+
+        this.setState({
+          columns: newColumns
+        })
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   onDragEnd = ({ source, destination }) => {
@@ -52,6 +84,7 @@ export default class CreatePlaylistView extends Component {
       // Then create a new copy of the column object
       const newCol = {
         id: start.id,
+        name: start.name,
         list: newList
       }
 
@@ -73,6 +106,7 @@ export default class CreatePlaylistView extends Component {
       // Create a new start column
       const newStartCol = {
         id: start.id,
+        name: start.name,
         list: newStartList
       }
 
@@ -85,6 +119,7 @@ export default class CreatePlaylistView extends Component {
       // Create a new end column
       const newEndCol = {
         id: end.id,
+        name: end.name,
         list: newEndList
       }
 
@@ -101,8 +136,28 @@ export default class CreatePlaylistView extends Component {
     }
   }
 
+  savePlaylist() {
+    Playlists.createPlaylist({title: this.state.playlistTitle, collection: this.state.columns.Playlist.list})
+      .then((res) => {
+        this.props.switchToPlaylistListView();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
+  updatePlaylistTitle(event) {
+    this.setState({
+      playlistTitle: event.target.value
+    })
+  }
+
   render() {
-    let displayScreenRender = [<DragDropContext onDragEnd={this.onDragEnd}>
+    let displayScreenRender = [<div className="playlist-main-menu">
+      <input className="playlist-name-input" type="text" placeholder="Title..." value={this.state.playlistTitle} onChange={this.updatePlaylistTitle}></input>
+      <button className="playlist-save" title="Save" onClick={this.savePlaylist}><i class="fa fa-save"></i></button>
+    </div>,
+    <DragDropContext onDragEnd={this.onDragEnd}>
       <div className="list-holder">
         {Object.values(this.state.columns).map(col => (
           <Column col={col} key={col.id} />

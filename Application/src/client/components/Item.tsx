@@ -1,16 +1,16 @@
 import React from 'react'
 import { Draggable } from 'react-beautiful-dnd'
 
-const Item = ({ text, index }) => {
+const Item = ({ title, index }) => {
   return (
-    <Draggable draggableId={text} index={index}>
+    <Draggable draggableId={title} index={index}>
       {provided => (
-        <div
+        <div className="item"
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
-          {text}
+          {title}
         </div>
       )}
     </Draggable>

@@ -147,8 +147,48 @@
 
 .create-playlist-view .display-screen .list-holder {
   display: flex;
+  height: 100%;
 }
 
 .create-playlist-view .display-screen .list-column {
   width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.create-playlist-view .display-screen .list-column .list-column-title {
+  margin: 0px;
+}
+
+.create-playlist-view .display-screen .list-column .list-column-body {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: auto;
+  height: 70px;
+}
+
+.create-playlist-view .display-screen .list-column .list-column-body .item {
+  width: 100%;
+}
+
+.create-playlist-view .display-screen {
+  display: flex;
+}
+
+.create-playlist-view .display-screen .playlist-main-menu {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-right: 10px;
+}
+
+.create-playlist-view .display-screen .playlist-main-menu .playlist-name-input {
+  width: 100%;
+}
+
+.create-playlist-view .display-screen .playlist-main-menu .playlist-save {
+  font-size: 22px;
+  margin: 5px;
 }

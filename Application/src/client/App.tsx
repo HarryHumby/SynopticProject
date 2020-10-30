@@ -38,7 +38,7 @@ export default class App extends Component {
 
   switchToCreatePlaylistView = () => {
     this.setState({
-      view: <CreatePlaylistView switchToHomeView={this.switchToHomeView} />
+      view: <CreatePlaylistView switchToHomeView={this.switchToHomeView} switchToPlaylistListView={this.switchToPlaylistListView}/>
     })
   }
 
