@@ -13,8 +13,7 @@ export default class App extends Component {
     super(props);
 
     this.state = {
-      view: <HomeView switchToPlaylistListView={this.switchToPlaylistListView} switchToLibraryView={this.switchToLibraryView} switchToHomeView={this.switchToHomeView} switchToSearchView={this.switchToSearchView}/>,
-      idle: false
+      view: <HomeView switchToPlaylistListView={this.switchToPlaylistListView} switchToLibraryView={this.switchToLibraryView} switchToHomeView={this.switchToHomeView} switchToSearchView={this.switchToSearchView}/>
     }
   }
 
@@ -52,18 +51,6 @@ export default class App extends Component {
     this.setState({
       view: <SearchView switchToHomeView={this.switchToHomeView} switchToLibraryView={this.switchToLibraryView} />
     })
-  }
-
-  setIdle() {
-    this.setState({
-      idle: true
-    });
-  }
-
-  setAwake() {
-    this.setState({
-      idle: false
-    });
   }
 
   render() {
