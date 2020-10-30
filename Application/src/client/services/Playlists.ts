@@ -2,7 +2,7 @@ import axios from 'axios';
 
 class Playlists {
 
-  listMusic() {
+  listPlaylists() {
     return axios.get(`/api/playlists`)
       .then((res) => {
         return res.data;

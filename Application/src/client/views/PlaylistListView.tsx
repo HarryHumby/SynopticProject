@@ -16,7 +16,7 @@ export default class PlaylistListView extends Component {
   }
 
   componentDidMount() {
-    Playlists.listMusic()
+    Playlists.listPlaylists()
       .then((playlists) => {
         this.setState({
           playlists: playlists
