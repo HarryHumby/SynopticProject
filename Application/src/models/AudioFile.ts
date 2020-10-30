@@ -1,5 +1,5 @@
 export interface IAudioFile {
-    id: string,
+    _id: string,
     title: string,
     artist: string[],
     album: string,
@@ -8,7 +8,7 @@ export interface IAudioFile {
 }
 
 export default class {
-    private id;
+    private _id;
     private title;
     private artist;
     private album;
@@ -16,7 +16,7 @@ export default class {
     private image;
 
     constructor(opts: IAudioFile) {
-        this.id = opts.id;
+        this._id = opts._id;
         this.title = opts.title;
         this.artist = opts.artist;
         this.album = opts.album;
@@ -26,7 +26,7 @@ export default class {
 
     toJSON() {
         return {
-            id: this.id,
+            _id: this._id,
             title: this.title,
             artist: this.artist,
             album: this.album,
